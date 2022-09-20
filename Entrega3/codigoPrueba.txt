@@ -1,0 +1,8 @@
+	x = 3.14 ;
+	// esto es para probar 546 veces if else
+	y12 = 23e24;
+	/* mas cosas*/
+	if z = x+y*2 ;
+	else elseptimo=4
+	// y aquí /* otra cosa */
+	ififi = 34 * 5;

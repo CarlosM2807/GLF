@@ -1,0 +1,26 @@
+------------------------- nohead.sh -----------------------
+
+Elimina la primera linea del fichero ('1d') del fichero que recibe primero (situacion-epidemiologica-coronavirus-en-castilla-y-leon.csv') y despues la salida la redirecciono a ../data/ejercicio1.txt con > asi me crea en el directorio data un archivo txt con la salida
+
+
+------------------------- pdata.sh  -----------------------
+
+Primero lo que hago es buscar las lineas que tienen la provincia correspondiente con '/NombreProvincia/' y luego dentro de las llaves las expresiones regulares de los datos que nos piden (s/.*Valladolid;//g s/;[0-9]*;[0-9]*\.[0-9]*\,.*$//). Ahora que ya tenemos lo que queremos lo escribo en el fichero que nos dice NombreProvincia.dat y la ruta para que lo guarde en la carpeta que se pide, con (w ../data/NombreProvincia.dat). Esto repetirlo con todas las provincias de la comunidad, y despues a cada archivo le añado en la primera linea una cabecera que indica que es cada dato. Con la siguiente linea:
+(sed -i "1i\casos_confirmados; nuevos_positivos; altas; fallecimientos" ../data/valladolid.dat) 
+
+ESTO ULTIMO DE LA CABECERA NO SE SI SERIA NECESARIO, PERO LO HE AÑADIDO PARA MEJOR COMPRENSION DE LOS DATOS
+
+
+------------------------- vaextrae.sh  -----------------------
+
+Al igual que en el anterior primero busco las lineas que contienen Valladolid (/Valladolid/) y luegoffiltro con los datos que nos piden, primero concateno el codigo de la provincia con el del municipio (separados por -, de forma que quede 47-005) (s/;[[:alpha:]][[:alpha:]]*;/-/) ,despues el nombre del pueblo y despues el nombre de la poblacion con esta expresion regular (s/;[[:digit:]]*;[[:digit:]]*$//) despues lo escribo es un fichero que se llama ejercicio3.csv ( w ../data/ejercicio3.csv ).
+
+Ahora tendria un archivo csv con (Codigo,NombreMunicipio,Poblacion) pero sin una cabecera que lo indique por tanto he añadido una cabecera en la primera linea:
+
+sed -i "1i\CodigoProvincia-CodigoMunicipio;NombreMunicipio;Población" ../data/ejercicio3.csv
+
+Ahora estan los datos y su respectiva cabecera en el archivo.
+
+
+
+
